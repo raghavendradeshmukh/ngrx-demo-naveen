@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { BooksRoutingModule } from './books-routing.module';
 import { HomeComponent } from './home/home.component';
-
+import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { booksReducer } from './store/books.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { BooksEffects } from './store/books.effects';
 
 @NgModule({
   declarations: [
@@ -11,7 +15,10 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     CommonModule,
-    BooksRoutingModule
+    FormsModule,
+    BooksRoutingModule,
+    StoreModule.forFeature('selectAllBooks', booksReducer),
+    EffectsModule.forFeature(BooksEffects)
   ]
 })
 export class BooksModule { }
