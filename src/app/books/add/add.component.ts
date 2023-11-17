@@ -31,9 +31,8 @@ export class AddComponent implements OnInit {
     this.store.dispatch(saveNewBookAPI({ book: { ...this.bookForm } }));
     let status$ = this.appState.pipe(select(apiSelector));
     status$.subscribe((res) => {
-      console.log("res", res);
       if (res.apiStatus == 200) {
-        // this.appState.dispatch(saveApiStatus({ status: { apiStatus: 0, apiResponseMessage: '' } }));
+        this.appState.dispatch(saveApiStatus({ status: { apiStatus: 0, apiResponseMessage: '' } }));
         this.router.navigate(['/']);
       }
     });
