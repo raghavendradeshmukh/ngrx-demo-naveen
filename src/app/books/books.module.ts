@@ -8,10 +8,12 @@ import { StoreModule } from '@ngrx/store';
 import { booksReducer } from './store/books.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BooksEffects } from './store/books.effects';
+import { AddComponent } from './add/add.component';
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    AddComponent
   ],
   imports: [
     CommonModule,
