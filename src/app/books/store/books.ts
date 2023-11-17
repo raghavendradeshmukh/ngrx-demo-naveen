@@ -4,3 +4,7 @@ export interface Books {
     author: string;
     cost: number;
 }
+
+export interface BookState {
+    books: Books[]
+} 
