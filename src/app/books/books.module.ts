@@ -9,11 +9,13 @@ import { booksReducer } from './store/books.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BooksEffects } from './store/books.effects';
 import { AddComponent } from './add/add.component';
+import { UpdateComponent } from './update/update.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    AddComponent
+    AddComponent,
+    UpdateComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { BooksService } from "../books.service";
-import { getAllBooksAPI, getAllBooksAPISuccess, saveNewBookAPI, saveNewBookAPISuccess } from "./books.action";
+import { getAllBooksAPI, getAllBooksAPISuccess, saveNewBookAPI, saveNewBookAPISuccess, updateBookAPI, updateBookAPISuccess } from "./books.action";
 import { EMPTY, map, switchMap, withLatestFrom } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { AppState } from "src/app/shared/local/app-state";
@@ -47,6 +47,21 @@ export class BooksEffects {
                     .pipe(map((data) => {
                         this.appState.dispatch(saveApiStatus({ status: { apiStatus: 200, apiResponseMessage: 'success' } }));
                         return saveNewBookAPISuccess({ response: data })
+                    }))
+            })
+        )
+    );
+
+    updateBook$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(updateBookAPI),
+            switchMap((book) => {
+                this.appState.dispatch(saveApiStatus({ status: { apiStatus: 0, apiResponseMessage: '' } }))
+                return this.booksService
+                    .updateBook(book.book)
+                    .pipe(map((data) => {
+                        this.appState.dispatch(saveApiStatus({ status: { apiStatus: 200, apiResponseMessage: 'success' } }));
+                        return updateBookAPISuccess({ book: data })
                     }))
             })
         )
