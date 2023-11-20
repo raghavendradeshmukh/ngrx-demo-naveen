@@ -20,4 +20,8 @@ export class BooksService {
   updateBook(book: Books) {
     return this.http.put<Books>(`http://localhost:3000/books/${book.id}`, book);
   }
+
+  deleteBookAPI(id: number) {
+    return this.http.delete(`http://localhost:3000/books/${id}`);
+  }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { BooksService } from "../books.service";
-import { getAllBooksAPI, getAllBooksAPISuccess, saveNewBookAPI, saveNewBookAPISuccess, updateBookAPI, updateBookAPISuccess } from "./books.action";
+import { deleteBookAPI, deleteBookAPISuccess, getAllBooksAPI, getAllBooksAPISuccess, saveNewBookAPI, saveNewBookAPISuccess, updateBookAPI, updateBookAPISuccess } from "./books.action";
 import { EMPTY, map, switchMap, withLatestFrom } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { AppState } from "src/app/shared/local/app-state";
@@ -62,6 +62,20 @@ export class BooksEffects {
                     .pipe(map((data) => {
                         this.appState.dispatch(saveApiStatus({ status: { apiStatus: 200, apiResponseMessage: 'success' } }));
                         return updateBookAPISuccess({ book: data })
+                    }))
+            })
+        )
+    );
+
+    deleteBook$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(deleteBookAPI),
+            switchMap((action) => {
+                this.appState.dispatch(saveApiStatus({ status: { apiStatus: 0, apiResponseMessage: '' } }))
+                return this.booksService.deleteBookAPI(action.id)
+                    .pipe(map((response) => {
+                        this.appState.dispatch(saveApiStatus({ status: { apiStatus: 200, apiResponseMessage: 'success' } }))
+                        return deleteBookAPISuccess({ id: action.id })
                     }))
             })
         )
