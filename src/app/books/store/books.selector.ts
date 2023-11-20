@@ -15,3 +15,6 @@ export const selectBookById = (bookId: number) => {
         }
     )
 }
+// alternative to above
+// export const selectTaskById = (id: number) =>
+//   createSelector(selectTasks, tasks => tasks.find(task => task.id === id));
