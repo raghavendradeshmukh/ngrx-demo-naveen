@@ -35,7 +35,6 @@ export class UpdateComponent implements OnInit {
         return this.store.pipe(select(selectBookById(id)));
       })
     );
-
     fetchFormData$.subscribe((data) => {
       if (data) {
         this.bookForm = { ...data };
